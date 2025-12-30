@@ -1,0 +1,82 @@
+# IMPORTANT: Do NOT commit personal data!
+# This file prevents accidentally pushing sensitive information
+
+# Personal data (CRITICAL - never commit!)
+data/raw/
+data/processed/
+data/tokenized/
+*.db
+*.sqlite
+*.sqlite3
+
+# Model checkpoints (too large for git)
+checkpoints/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+
+# Training logs
+logs/
+runs/
+tensorboard/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build
+build/
+dist/
+*.egg-info/
+
+# Secrets (if you add API keys later)
+.env
+secrets.yaml
+*.key
+
+# Temporary files
+*.tmp
+*.bak
+*.log
+
+# Large exports
+instagram-export/
+instagram_data/
+imessage_data/
+
+# Keep directory structure with .gitkeep files
+!data/.gitkeep
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/tokenized/.gitkeep
+!checkpoints/.gitkeep
+!logs/.gitkeep

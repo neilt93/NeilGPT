@@ -1,0 +1,117 @@
+# Content Filtering Configuration (MANDATORY for Professional Project)
+# This ensures your trained model is safe for public demonstration
+
+# PII (Personally Identifiable Information) Removal
+pii_filtering:
+  enabled: true
+
+  # Replace with tokens or remove
+  replace_with_tokens: true  # If false, removes entire message
+
+  phone_numbers:
+    enabled: true
+    replacement_token: "<PHONE>"
+
+  email_addresses:
+    enabled: true
+    replacement_token: "<EMAIL>"
+
+  names:
+    enabled: true
+    replacement_token: "<NAME>"
+    use_ner: true  # Use spaCy NER for detection
+
+  addresses:
+    enabled: true
+    replacement_token: "<ADDRESS>"
+
+  credit_cards:
+    enabled: true
+    replacement_token: "<CARD>"
+
+  ssn:
+    enabled: true
+    replacement_token: "<SSN>"
+
+# Financial Information Filtering
+financial_filtering:
+  enabled: true
+  remove_entire_message: true  # Don't just replace, remove the whole message
+
+  keywords:
+    - "salary"
+    - "income"
+    - "paid $"
+    - "bought for $"
+    - "paypal"
+    - "venmo"
+    - "zelle"
+    - "account number"
+    - "routing number"
+    - "bank account"
+
+# Sensitive Topic Filtering
+sensitive_topics:
+  enabled: true
+
+  # Keep general opinions, remove specific details
+  health:
+    enabled: true
+    remove_specific_details: true
+    keywords:
+      - "diagnosed with"
+      - "prescription"
+      - "medication"
+      - "doctor said"
+      - "symptoms"
+
+  politics:
+    enabled: true
+    keep_general_opinions: true  # "I think X is bad" → KEEP
+    remove_specific_details: true  # Names, voting, etc → REMOVE
+    keywords_to_remove:
+      - "voted for"
+      - "ballot"
+      - "polling"
+
+  religion:
+    enabled: false  # Set to true if you want to filter religious content
+    remove_deeply_personal: true
+
+# Explicit Language Handling
+explicit_language:
+  # Keep in TRAINING (preserves your natural style)
+  # Optionally filter during GENERATION (professional output)
+  filter_during_training: false
+  filter_during_generation: false  # Can enable later if needed
+
+# URL Handling
+urls:
+  enabled: true
+  replacement_token: "<URL>"  # Or set to null to remove
+
+# Logging and Reporting
+logging:
+  enabled: true
+  report_path: "data/processed/filter_report.json"
+  save_filtered_messages: true  # Save filtered messages for manual review
+  filtered_messages_path: "data/processed/filtered_messages.json"
+
+  # Statistics to track
+  track_stats:
+    - "total_messages"
+    - "messages_filtered"
+    - "pii_instances_removed"
+    - "financial_messages_removed"
+    - "sensitive_topic_messages_removed"
+
+# Minimum message length (remove very short messages)
+min_message_length: 2  # characters
+
+# Skip message reactions and system messages
+skip_patterns:
+  - "^Liked "
+  - "^Loved "
+  - "^Laughed at "
+  - "^Emphasized "
+  - "^Questioned "
