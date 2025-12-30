@@ -5,6 +5,8 @@
 data/raw/
 data/processed/
 data/tokenized/
+data/instagram-*
+data/*instagram*/
 *.db
 *.sqlite
 *.sqlite3
